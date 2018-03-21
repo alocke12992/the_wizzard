@@ -1,0 +1,1 @@
+1. check for unique name on blur 
