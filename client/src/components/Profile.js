@@ -10,6 +10,7 @@ import
   Button,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import Dropzone from 'react-dropzone';
 
 const Fragment = React.Fragment;
 
@@ -19,7 +20,12 @@ class Profile extends React.Component
 {
   state = {
     editing: false,
-    formValues: { name: '', email: '', gamertag: '' },
+    formValues: {
+      name: '',
+      email: '',
+      gamertag: '',
+      file: ''
+    },
   }
 
   componentDidMount()
@@ -49,6 +55,16 @@ class Profile extends React.Component
 
   handleSubmit = ( e ) =>
   {
+    e.preventDefault();
+    const { formValues: { name, email, file, gamertag } } = this.state
+    const { user, dispatch } = this.props;
+    dispatch( updateUser( user.id, { name, email, file, gamertag } ) )
+    this.setState( {
+      editing: false, formValues: {
+        ...this.state.formValues,
+        file: ''
+      }
+    } )
   }
 
   profileView = () =>
@@ -68,14 +84,30 @@ class Profile extends React.Component
     )
   }
 
+  onDrop = ( files ) =>
+  {
+    this.setState( {
+      formValues: {
+        ...this.state.formValues,
+        file: files[0]
+      }
+    } )
+  }
+
   editView = () =>
   {
-    const { formValues: { name, email, gamertag } } = this.state
+    const { formValues: { name, email, gamertag, file } } = this.state
     return (
       <Form onSubmit={ this.handleSubmit }>
         <Grid.Column width={ 4 }>
+          <Dropzone
+            onDrop={ this.onDrop }
+            multiple={ false }
+          >
+            { file && <Image src={ file.preview } /> }
+          </Dropzone>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column width={ 8 }>
           <Form.Input
             label="Name"
             name="name"
