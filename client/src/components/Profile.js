@@ -11,6 +11,7 @@ import
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
+import { updateUser } from '../actions/user';
 
 const Fragment = React.Fragment;
 
@@ -56,11 +57,12 @@ class Profile extends React.Component
   handleSubmit = ( e ) =>
   {
     e.preventDefault();
-    const { formValues: { name, email, file, gamertag } } = this.state
+    const { formValues: { name, email, file, gamertag } } = this.state;
     const { user, dispatch } = this.props;
     dispatch( updateUser( user.id, { name, email, file, gamertag } ) )
     this.setState( {
-      editing: false, formValues: {
+      editing: false,
+      formValues: {
         ...this.state.formValues,
         file: ''
       }
