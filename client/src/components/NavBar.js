@@ -3,26 +3,17 @@ import { Menu } from 'semantic-ui-react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
-import Profile from './Profile'
-import Tags from './Tags'
-
 
 class NavBar extends Component {
   rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
-    if ( user.id ) {
+    if (user.id) {
       return (
         <Menu.Menu position='right'>
-          <Link to='/profile'>
-            <Menu.Item name='Profile' />
-          </Link>
-          <Link to='/tags'>
-            <Menu.Item name='Tags' />
-          </Link>
           <Menu.Item
             name='Logout'
-            onClick={ () => dispatch( handleLogout( history ) ) }
+            onClick={() => dispatch(handleLogout(history))}
           />
         </Menu.Menu>
       );
@@ -57,4 +48,4 @@ const mapStateToProps = state => {
   return { user: state.user };
 };
 
-export default withRouter( connect( mapStateToProps )( NavBar ) );
+export default withRouter(connect(mapStateToProps)(NavBar));

@@ -12,26 +12,28 @@ const styles = {
   }
 }
 
-const Tag = ( {
-  tag,
-  deletable,
-  deleteAction
-} ) => (
-    <List.Item style={ styles.tag }>
-      { deleteable &&
+const Tag = ({ 
+  tag, 
+  deletable, 
+  deleteAction 
+}) => (
+  <List.Item style={styles.tag}>
+    { deletable &&
         <List.Icon
           name="cancel"
-          onClick={ () => deleteAction( tag.id ) }
+          onClick={ () => deleteAction(tag.id) }
         />
-      }
-      <List.Content>
-        <List.Header>
-          <Link to={ `/tags/${ tag.name }` }>
-            #{ tag.name }
-          </Link>
-        </List.Header>
-      </List.Content>
-    </List.Item>
-  )
+    }
+    <List.Content>
+      <List.Header>
+        <Link to={`/tags/${tag.name}`}>
+          #{tag.name}
+        </Link>
+      </List.Header>
+    </List.Content>
+  </List.Item>
+)
 
 export default Tag
+
+

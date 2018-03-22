@@ -1,32 +1,29 @@
-import axios from 'axios'
-export const TAGS = 'TAGS'
-export const ADD_TAG = 'ADD_TAG'
-export const DELETE_TAG = 'DELETE_TAG'
+import axios from 'axios';
 
-export const deleteTag = ( id ) => {
+export const deleteTag = (id) => {
   //DELETE /api/tags/:id
-  return ( dispatch ) => {
-    axios.delete( `/api/tags/${ id }` )
-      .then( res => dispatch( { type: DELETE_TAG, id, headers: res.headers } ) )
+  return (dispatch) => {
+    axios.delete(`/api/tags/${id}`)
+      .then( res => dispatch({ type: 'DELETE_TAG', id, headers: res.headers }) )
   }
 }
 
 export const getTags = () => {
-  return ( dispatch ) => {
-    axios.get( '/api/tags' )
-      .then( res => dispatch( { type: TAGS, tags: res.data, headers: res.headers } ) )
+  return (dispatch) => {
+    axios.get('/api/tags')
+      .then( res => dispatch({ type: 'TAGS', tags: res.data, headers: res.headers }) )
   }
 }
 
-export const addTag = ( tag ) => {
-  return ( dispatch ) => {
-    axios.post( '/api/tags', { tag } )
+export const addTag = (tag) => {
+  return (dispatch) => {
+    axios.post('/api/tags', { tag })
       .then( res => {
         const { data: tag, headers } = res;
-        if ( res.data )
-          dispatch( { type: ADD_TAG, tag, headers } )
+        if (res.data)
+          dispatch({ type: 'ADD_TAG', tag, headers })
         else
-          dispatch( { type: 'HEADERS', headers } )
-      } )
+          dispatch({ type: 'HEADERS', headers })
+      })
   }
 }

@@ -6,31 +6,31 @@ import { addTag } from '../actions/tags';
 class TagForm extends React.Component {
   state = { name: '' }
 
-  handleChange = ( e ) => {
+  handleChange = (e) => {
     const { value } = e.target;
-    const name = value.toLowerCase().replace( ' ', '' )
-    this.setState( { name } )
+    const name = value.toLowerCase().replace(' ', '')
+    this.setState({ name })
   }
 
-  handleSubmit = ( e ) => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const tag = { name: this.state.name }
-    this.props.dispatch( addTag( tag ) )
-    this.setState( { name: '' } )
+    this.props.dispatch(addTag(tag))
+    this.setState({ name: '' })
   }
 
   render() {
     return (
-      <Form onSubmit={ this.handleSubmit }>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Input
-          onChange={ this.handleChange }
-          value={ this.state.name }
-          required
-          placeholder="Add Tag"
-        />
+           onChange={this.handleChange}
+           value={this.state.name}
+           required
+           placeholder="Add Tag"
+         />
       </Form>
     )
   }
 }
 
-export default connect()( TagForm );
+export default connect()(TagForm);

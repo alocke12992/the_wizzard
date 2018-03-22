@@ -1,5 +1,4 @@
-
-class DefaultImageToUsers < ActiveRecord::Migration[5.1]
+class DefaultImagesToUsers < ActiveRecord::Migration[5.1]
   def up
     default = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png'
     change_column :users, :image, :string, default: default
@@ -8,7 +7,7 @@ class DefaultImageToUsers < ActiveRecord::Migration[5.1]
 
   def down
     default = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png'
-    change_column :users, :image, :sting, default: nil
+    change_column :users, :image, :string, default: nil
     User.where(image: default).update_all(image: nil)
   end
 end
