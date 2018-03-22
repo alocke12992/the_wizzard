@@ -9,13 +9,12 @@ import Home from './Home';
 import ProtectedRoute from './ProtectedRoute';
 import AuthRoute from './AuthRoute';
 import FetchUser from './FetchUser';
-import Profile from './Profile'
+import Profile from './Profile';
+import Tags from './Tags';
 
 
-class App extends Component
-{
-  render()
-  {
+class App extends Component {
+  render() {
     return (
       <div>
         <NavBar />
@@ -26,6 +25,7 @@ class App extends Component
             <AuthRoute exact path='/login' component={ Login } />
             <AuthRoute exact path='/register' component={ Register } />
             <ProtectedRoute exact path='/profile' component={ Profile } />
+            <ProtectedRoute exact path='/tags' component={ Tags } />
             <Route component={ NoMatch } />
           </Switch>
         </FetchUser>

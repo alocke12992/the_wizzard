@@ -4,20 +4,21 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handleLogout } from '../actions/auth';
 import Profile from './Profile'
+import Tags from './Tags'
 
 
-class NavBar extends Component
-{
-  rightNavs = () =>
-  {
+class NavBar extends Component {
+  rightNavs = () => {
     const { user, dispatch, history } = this.props;
 
-    if ( user.id )
-    {
+    if ( user.id ) {
       return (
         <Menu.Menu position='right'>
           <Link to='/profile'>
             <Menu.Item name='Profile' />
+          </Link>
+          <Link to='/tags'>
+            <Menu.Item name='Tags' />
           </Link>
           <Menu.Item
             name='Logout'
@@ -38,8 +39,7 @@ class NavBar extends Component
     );
   }
 
-  render()
-  {
+  render() {
     return (
       <div>
         <Menu pointing secondary>
@@ -53,8 +53,7 @@ class NavBar extends Component
   }
 }
 
-const mapStateToProps = state =>
-{
+const mapStateToProps = state => {
   return { user: state.user };
 };
 

@@ -1,10 +1,17 @@
 import axios from 'axios'
 export const ADD_TAG = 'ADD_TAG'
 export const HEADERS = 'HEADERS'
+export const TAGS = 'TAGS'
+
+
+export const getTags = () => {
+  return ( dispatch ) => {
+    axios.get( '/api/tags' )
+      .then( res => dispatch( { type: TAGS, tags: res.data, headers: res.headers } ) )
+  }
+}
 
 export const addTag = ( tag ) => {
-  //send tag to database 
-  //if I get a tag back, update store and dispatch headers
   return ( dispatch ) => {
     axios.post( '/api/tags', { tag } )
       .then( res => {
