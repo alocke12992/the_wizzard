@@ -5,8 +5,8 @@ const likeUsers = ( state = [], action ) => {
     case LIKE_USERS:
       return action.users
     default:
-      return state;
+      return state
   }
 }
 
-export default likeUsers; 
+export default likeUsers;

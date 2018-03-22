@@ -1,6 +1,6 @@
-json.array! @users do |users| 
-  json.id user.id 
+json.array! @users do |user|
+  json.id user.id
   json.name user.name
-  json.image user.image 
+  json.image user.image
   json.tags user.tags
-end 
+end
