@@ -15,6 +15,7 @@ gem 'devise'
 gem 'devise_token_auth'
 gem 'aws-sdk'
 gem 'dotenv-rails'
+gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   gem 'pry'

@@ -1,8 +1,6 @@
 
-const user = ( state = {}, action ) =>
-{
-  switch ( action.type )
-  {
+const user = ( state = {}, action ) => {
+  switch ( action.type ) {
     case 'LOGIN':
       return action.user;
     case 'USER':

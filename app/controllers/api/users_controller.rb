@@ -1,14 +1,20 @@
 class Api::UsersController < ApplicationController
     before_action :authenticate_user!
 
+    def like 
+      tags = current_user.tags.map{ |tag| tag.name }
+      @users = User.like_users(current_user.id, tags )
+      render 'user.jbuilder'
+    end 
+
     def update
-        user = User.find(params[:id])
-        user.name = params[:name]
-        user.email = params[:email]
-    user.gamertag = params[:gamertag]
-        s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
-        s3_bucket = ENV['BUCKET']
-        file = params[:file]
+      user = User.find(params[:id])
+      user.name = params[:name]
+      user.email = params[:email]
+      user.gamertag = params[:gamertag]
+      s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
+      s3_bucket = ENV['BUCKET']
+      file = params[:file]
         begin
             ext = File.extname(file.tempfile)
             obj = s3.bucket(s3_bucket).object("avatars/#{user.id}#{ext}")

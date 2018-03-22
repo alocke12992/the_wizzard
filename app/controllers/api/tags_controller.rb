@@ -2,13 +2,16 @@ class Api::TagsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render json: Tags.all
+    render json: current_user.tags
   end
 
-  def show
-    @tag = Tag.find(params[:id])
-    render json: @tag
-  end
+  def destroy
+    Tagging.find_by(
+      user_id: current_user.id, 
+      tag_id: params[:id]
+    ).destroy
+  end 
+
 
   def create 
     name = params[:tag][:name]
@@ -18,10 +21,5 @@ class Api::TagsController < ApplicationController
       render json: tag
     end 
   end 
-
-  def update
-    
-  end
-
 
 end

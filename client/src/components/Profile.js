@@ -53,6 +53,7 @@ class Profile extends React.Component {
     e.preventDefault();
     const { formValues: { name, email, file, gamertag } } = this.state;
     const { user, dispatch } = this.props;
+    debugger
     dispatch( updateUser( user.id, { name, email, file, gamertag } ) )
     this.setState( {
       editing: false,

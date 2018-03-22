@@ -1,8 +1,15 @@
 import axios from 'axios'
-export const ADD_TAG = 'ADD_TAG'
-export const HEADERS = 'HEADERS'
 export const TAGS = 'TAGS'
+export const ADD_TAG = 'ADD_TAG'
+export const DELETE_TAG = 'DELETE_TAG'
 
+export const deleteTag = ( id ) => {
+  //DELETE /api/tags/:id
+  return ( dispatch ) => {
+    axios.delete( `/api/tags/${ id }` )
+      .then( res => dispatch( { type: DELETE_TAG, id, headers: res.headers } ) )
+  }
+}
 
 export const getTags = () => {
   return ( dispatch ) => {
@@ -15,11 +22,11 @@ export const addTag = ( tag ) => {
   return ( dispatch ) => {
     axios.post( '/api/tags', { tag } )
       .then( res => {
-        if ( res.data ) {
-          dispatch( { type: ADD_TAG, tag: res.data, headers: res.headers } )
-        } else {
-          dispatch( { type: HEADERS, headers: res.data } )
-        }
+        const { data: tag, headers } = res;
+        if ( res.data )
+          dispatch( { type: ADD_TAG, tag, headers } )
+        else
+          dispatch( { type: 'HEADERS', headers } )
       } )
   }
 }

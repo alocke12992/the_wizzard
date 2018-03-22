@@ -1,4 +1,4 @@
-import { TAGS, ADD_TAG, HEADERS } from '../actions/tags'
+import { TAGS, DELETE_TAG, ADD_TAG } from '../actions/tags'
 
 const tags = ( state = [], action ) => {
   switch ( action.type ) {
@@ -6,6 +6,8 @@ const tags = ( state = [], action ) => {
       return action.tags
     case ADD_TAG:
       return [...state, action.state];
+    case DELETE_TAG:
+      return state.filter( t => t.id !== action.id )
     default:
       return state;
 
