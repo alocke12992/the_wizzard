@@ -1,6 +1,5 @@
 import React from 'react';
-import
-{
+import {
   Form,
   Grid,
   Image,
@@ -12,13 +11,13 @@ import
 import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import { updateUser } from '../actions/user';
+import Tags from './Tags'
 
 const Fragment = React.Fragment;
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 
-class Profile extends React.Component
-{
+class Profile extends React.Component {
   state = {
     editing: false,
     formValues: {
@@ -29,22 +28,18 @@ class Profile extends React.Component
     },
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     const { user: { name, email, gamertag } } = this.props
     this.setState( { formValues: { name, email, gamertag } } )
   }
 
-  toggleEdit = () =>
-  {
-    this.setState( state =>
-    {
+  toggleEdit = () => {
+    this.setState( state => {
       return { editing: !state.editing }
     } )
   }
 
-  handleChange = ( e ) =>
-  {
+  handleChange = ( e ) => {
     const { name, value } = e.target;
     this.setState( {
       formValues: {
@@ -54,8 +49,7 @@ class Profile extends React.Component
     } )
   }
 
-  handleSubmit = ( e ) =>
-  {
+  handleSubmit = ( e ) => {
     e.preventDefault();
     const { formValues: { name, email, file, gamertag } } = this.state;
     const { user, dispatch } = this.props;
@@ -69,8 +63,7 @@ class Profile extends React.Component
     } )
   }
 
-  profileView = () =>
-  {
+  profileView = () => {
     const { user } = this.props;
     return (
       <Fragment>
@@ -86,8 +79,7 @@ class Profile extends React.Component
     )
   }
 
-  onDrop = ( files ) =>
-  {
+  onDrop = ( files ) => {
     this.setState( {
       formValues: {
         ...this.state.formValues,
@@ -96,8 +88,7 @@ class Profile extends React.Component
     } )
   }
 
-  editView = () =>
-  {
+  editView = () => {
     const { formValues: { name, email, gamertag, file } } = this.state
     return (
       <Form onSubmit={ this.handleSubmit }>
@@ -137,8 +128,7 @@ class Profile extends React.Component
     )
   }
 
-  render()
-  {
+  render() {
     const { editing } = this.state;
     return (
       <Container>
@@ -151,6 +141,9 @@ class Profile extends React.Component
                 { editing ? 'Cancel' : 'Edit' }
               </Button>
             </Grid.Column>
+            <Grid.Column width={ 16 }>
+              <Tags />
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Container>
@@ -160,8 +153,7 @@ class Profile extends React.Component
 
 }
 
-const mapStateToProps = ( state ) =>
-{
+const mapStateToProps = ( state ) => {
   return { user: state.user }
 }
 
